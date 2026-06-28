@@ -1,0 +1,67 @@
+.insumo-background {
+  --background: #1a1a2e;
+}
+
+.contenedor {
+  padding: 24px 16px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+h2 {
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.icono-insumo {
+  font-size: 36px;
+  text-align: center;
+  margin: 8px 0;
+}
+
+p {
+  color: #c5d0ff;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.campo {
+  --background: rgba(255, 255, 255, 0.08);
+  --border-radius: 12px;
+  --border-color: transparent;
+  --color: white;
+  --placeholder-color: #c5d0ff;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+ion-input, ion-select {
+  --color: white;
+  --placeholder-color: #c5d0ff;
+  padding: 4px 0;
+}
+
+.botones {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.cancelar {
+  flex: 1;
+  --background: rgba(255, 255, 255, 0.1);
+  --color: white;
+  --border-radius: 12px;
+}
+
+.guardar {
+  flex: 1;
+  --background: #4c6ef5;
+  --color: white;
+  --border-radius: 12px;
+}

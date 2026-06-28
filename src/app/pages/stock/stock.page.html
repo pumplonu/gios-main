@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content
+[fullscreen]="true"
+class="stock-background">
+
+<div class="contenedor">
+
+<h2>
+
+Consulta de Stock
+
+</h2>
+
+<ion-item class="busqueda">
+
+<ion-input
+placeholder="Buscar insumo..."
+[(ngModel)]="busqueda">
+</ion-input>
+
+</ion-item>
+
+<ion-card
+class="insumo-card"
+*ngFor="let item of insumos">
+
+<ion-card-content>
+
+<div class="cabecera">
+
+<div class="emoji">
+
+{{obtenerIcono(item.categoria)}}
+
+</div>
+
+<div>
+
+<h3>
+
+{{item.nombre}}
+
+</h3>
+
+<p>
+
+{{item.id}}
+
+</p>
+
+</div>
+
+</div>
+
+<div class="detalle">
+
+<p>
+
+Categoría:
+<strong>
+
+{{item.categoria}}
+
+</strong>
+
+</p>
+
+<p>
+
+Stock:
+<strong>
+
+{{item.cantidad}}
+{{item.unidad}}
+
+</strong>
+
+</p>
+
+<div
+class="estado-stock"
+[ngClass]="obtenerClaseEstado(item.cantidad)">
+
+{{obtenerEstado(item.cantidad)}}
+
+</div>
+
+</div>
+
+<div class="acciones">
+
+<ion-button size="small" (click)="editarInsumo(item)">
+  Editar
+</ion-button>
+
+<ion-button size="small" color="danger" (click)="confirmarEliminar(item.id, item.nombre)">
+  Eliminar
+</ion-button>
+
+</div>
+
+</ion-card-content>
+
+</ion-card>
+
+</div>
+
+</ion-content>

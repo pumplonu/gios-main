@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Alertas de Stock</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div *ngIf="insumosCriticos.length === 0" class="sin-alertas">
+    <div class="icono-ok">✅</div>
+    <h3>Sin alertas</h3>
+    <p>No hay productos en estado crítico.</p>
+  </div>
+
+  <ion-card *ngFor="let item of insumosCriticos" class="alerta-card">
+    <ion-card-content>
+      <div class="alerta-header">
+        <span class="icono-alerta">⚠️</span>
+        <div>
+          <h3>{{ item.nombre }}</h3>
+          <p>Categoría: <strong>{{ item.categoria }}</strong></p>
+        </div>
+      </div>
+      <div class="alerta-detalle">
+        <p>Stock actual: <strong>{{ item.cantidad }} {{ item.unidad }}</strong></p>
+        <div class="estado-critico">Crítico</div>
+        <p class="mensaje">Este producto está por agotarse, se recomienda reabastecer.</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

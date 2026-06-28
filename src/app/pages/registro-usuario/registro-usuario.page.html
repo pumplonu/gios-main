@@ -1,0 +1,117 @@
+<ion-content
+[fullscreen]="true"
+class="registro-background">
+
+<div class="contenedor">
+
+<h2>
+
+Registrar Nuevo Usuario
+
+</h2>
+
+<div class="imagen-superior">
+
+<div class="chef">
+
+👨‍🍳
+
+</div>
+
+</div>
+
+<h3>
+
+Registro de Nuevo Usuario
+
+</h3>
+
+<p>
+
+Complete el formulario para registrar al nuevo usuario.
+
+</p>
+
+<ion-item class="campo">
+
+<ion-input
+placeholder="Nombre Completo"
+[(ngModel)]="nombre">
+</ion-input>
+
+</ion-item>
+
+<ion-item class="campo">
+
+<ion-input
+placeholder="Correo electrónico"
+[(ngModel)]="correo">
+</ion-input>
+
+</ion-item>
+
+<ion-item class="campo">
+
+<ion-input
+placeholder="Crear contraseña"
+[(ngModel)]="password">
+</ion-input>
+
+</ion-item>
+
+<ion-item class="campo">
+
+<ion-select
+placeholder="Seleccionar rol"
+[(ngModel)]="rol">
+
+<ion-select-option value="admin">
+
+Administrador
+
+</ion-select-option>
+
+<ion-select-option value="empleado">
+
+Empleado
+
+</ion-select-option>
+
+</ion-select>
+
+</ion-item>
+
+<ion-item class="campo">
+
+<ion-input
+placeholder="Número telefónico"
+[(ngModel)]="telefono">
+</ion-input>
+
+</ion-item>
+
+<div class="botones">
+
+<ion-button class="cancelar" (click)="cancelar()">
+  Cancelar
+</ion-button>
+
+<ion-button
+class="guardar"
+(click)="guardarUsuario()">
+
+Guardar
+
+</ion-button>
+
+</div>
+
+<div class="footer">
+
+Gestión de Inventario para Restaurantes
+
+</div>
+
+</div>
+
+</ion-content>

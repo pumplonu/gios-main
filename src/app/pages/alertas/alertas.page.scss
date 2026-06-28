@@ -1,0 +1,60 @@
+.sin-alertas {
+  text-align: center;
+  margin-top: 60px;
+
+  .icono-ok {
+    font-size: 48px;
+    margin-bottom: 12px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  p {
+    color: #8c8c8c;
+  }
+}
+
+.alerta-card {
+  border-left: 4px solid #eb445a;
+  margin-bottom: 12px;
+}
+
+.alerta-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+
+  .icono-alerta {
+    font-size: 28px;
+  }
+
+  h3 {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+  }
+}
+
+.estado-critico {
+  display: inline-block;
+  background: #eb445a;
+  color: white;
+  padding: 2px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  margin: 6px 0;
+}
+
+.mensaje {
+  font-size: 13px;
+  color: #8c8c8c;
+  margin-top: 6px;
+}

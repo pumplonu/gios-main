@@ -1,0 +1,89 @@
+<ion-content [fullscreen]="true" class="login-background">
+
+<div class="contenedor">
+
+  <div class="logo-container">
+
+    <img
+      src="assets/images/logo-restaurante.png"
+      class="logo">
+
+  </div>
+
+  <h2>Iniciar Sesión</h2>
+
+  <div
+    class="mensaje-error"
+    *ngIf="mensajeError">
+
+    <ion-icon name="alert-circle"></ion-icon>
+
+    <span>
+      {{mensajeError}}
+    </span>
+
+  </div>
+
+  <div class="campo">
+
+    <ion-icon
+      name="mail"
+      class="icono-input">
+    </ion-icon>
+
+    <ion-input
+      fill="outline"
+      placeholder="Correo electrónico"
+      [(ngModel)]="correo">
+    </ion-input>
+
+  </div>
+
+  <div class="campo">
+
+    <ion-icon
+      name="lock-closed"
+      class="icono-input">
+    </ion-icon>
+
+    <ion-input
+      fill="outline"
+      placeholder="Contraseña"
+      [type]="mostrarPassword ? 'text' : 'password'"
+      [(ngModel)]="password">
+    </ion-input>
+
+    <ion-icon
+      class="icono-password"
+      [name]="mostrarPassword ? 'eye' : 'eye-off'"
+      (click)="mostrarPassword = !mostrarPassword">
+    </ion-icon>
+
+  </div>
+
+  <div class="olvide">
+
+    <a>
+      ¿Olvidaste tu contraseña?
+    </a>
+
+  </div>
+
+  <ion-button
+    expand="block"
+    class="boton-login"
+    (click)="iniciarSesion()">
+
+    Iniciar Sesión
+
+  </ion-button>
+
+  <div class="footer">
+
+    Gestión de Inventario para Restaurantes
+
+  </div>
+
+</div>
+
+</ion-content>

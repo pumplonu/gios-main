@@ -1,0 +1,7 @@
+{
+  "name": "gios",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
