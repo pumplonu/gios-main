@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import {
 InventarioService
 } from '../../services/inventario';
+import { ReporteService } from '../../services/reporte';
 import {
 UsuarioService
 }
@@ -53,7 +54,8 @@ fecha='';
 
 constructor(
 private router:Router,
-private inventarioService:InventarioService
+private inventarioService:InventarioService,
+private reporteService: ReporteService
 ){}
 
 guardarInsumo(){
@@ -72,10 +74,11 @@ fecha:this.fecha
 
 });
 
-this.router.navigate([
-'/registro-exitoso'
-]);
-
+this.reporteService.registrarActividad(
+  'Registró insumo',
+  `Insumo: ${this.nombre} | Cantidad: ${this.cantidad} ${this.unidad} | Categoría: ${this.categoria}`
+);
+this.router.navigate(['/registro-exitoso']);
 }
 
 cancelar() {

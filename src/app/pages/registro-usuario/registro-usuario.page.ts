@@ -9,6 +9,8 @@ import {
 UsuarioService
 }
 from '../../services/usuario';
+import { ReporteService } from '../../services/reporte';
+
 
 import {
 
@@ -63,7 +65,7 @@ rol='';
 constructor(
 
 private router:Router,
-
+private reporteService: ReporteService,
 private usuarioService:UsuarioService
 
 ){}
@@ -84,6 +86,9 @@ rol:this.rol
 
 });
 
+this.reporteService.registrarActividad(
+  'Registró usuario',
+  `Usuario: ${this.nombre} | Rol: ${this.rol} | Correo: ${this.correo}`);
 this.router.navigate([
 '/registro-exitoso'
 ]);

@@ -1,0 +1,59 @@
+.sin-usuarios {
+  text-align: center;
+  margin-top: 60px;
+
+  .icono {
+    font-size: 48px;
+    margin-bottom: 12px;
+  }
+
+  h3 { font-size: 20px; font-weight: 700; }
+  p { color: #8c8c8c; }
+}
+
+.usuario-card {
+  margin-bottom: 12px;
+}
+
+.usuario-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+
+  .avatar { font-size: 28px; }
+
+  h3 { margin: 0; font-weight: 700; }
+  p { margin: 0; font-size: 13px; color: #8c8c8c; }
+}
+
+.rol-badge {
+  margin-left: auto;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.rol-admin {
+  background: #eb445a;
+  color: white;
+}
+
+.rol-empleado {
+  background: #2dd36f;
+  color: white;
+}
+
+.telefono {
+  font-size: 13px;
+  color: #8c8c8c;
+  margin-bottom: 8px;
+}
+
+.acciones {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}

@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Reportes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item class="campo-fecha">
+    <ion-select placeholder="Seleccionar fecha" [(ngModel)]="fechaSeleccionada" (ngModelChange)="filtrarPorFecha()">
+      <ion-select-option *ngFor="let f of fechasDisponibles" [value]="f">
+        {{ f }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <div *ngIf="actividadesFiltradas.length === 0" class="sin-actividad">
+    <div class="icono">📋</div>
+    <h3>Sin actividad</h3>
+    <p>No hay registros para esta fecha.</p>
+  </div>
+
+  <ion-card *ngFor="let item of actividadesFiltradas" class="actividad-card">
+    <ion-card-content>
+      <div class="actividad-header">
+        <span class="accion">{{ item.accion }}</span>
+        <span class="hora">{{ item.hora }}</span>
+      </div>
+      <p class="detalle">{{ item.detalle }}</p>
+      <p class="usuario">👤 {{ item.usuario }}</p>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

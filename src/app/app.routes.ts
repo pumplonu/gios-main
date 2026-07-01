@@ -34,4 +34,12 @@ export const routes: Routes = [
     path: 'alertas',
     loadComponent: () => import('./pages/alertas/alertas.page').then( m => m.AlertasPage)
   },
+  {
+    path: 'reportes',
+    loadComponent: () => import('./pages/reportes/reportes.page').then( m => m.ReportesPage)
+  },
+  {
+    path: 'ver-usuarios',
+    loadComponent: () => import('./pages/ver-usuarios/ver-usuarios.page').then( m => m.VerUsuariosPage)
+  },
 ];

@@ -13,7 +13,9 @@ import { settingsOutline,
   addCircleOutline, 
   personAddOutline, 
   logOutOutline,
-  warningOutline } from 'ionicons/icons';
+  warningOutline,
+  barChartOutline,
+  peopleOutline } from 'ionicons/icons';
 import { UsuarioService } from '../services/usuario';
 
 @Component({
@@ -33,21 +35,30 @@ export class HomePage implements OnInit {
     private usuarioService: UsuarioService,
     private router: Router
   ) {
-    addIcons({ settingsOutline, cubeOutline, addCircleOutline, personAddOutline, logOutOutline, warningOutline });
+    addIcons({ settingsOutline, 
+      cubeOutline, 
+      addCircleOutline, 
+      personAddOutline, 
+      logOutOutline, 
+      warningOutline, 
+      barChartOutline, 
+      peopleOutline });
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
     const usuario = this.usuarioService.obtenerUsuarioActual();
     if (usuario) {
       this.esAdmin = usuario.rol === 'admin';
     } else {
       this.router.navigate(['/login']);
     }
-  }
+  } 
 
   cerrarSesion() {
   this.usuarioService.cerrarSesion();
   this.router.navigate(['/login']);
-}
+  }
 
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InventarioService, Insumo } from '../../services/inventario';
+import { ReporteService } from '../../services/reporte';
 import {
   IonContent, IonItem, IonInput, IonButton, IonCard,
   IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton,
@@ -26,7 +27,8 @@ export class StockPage {
 
   constructor(
     private inventarioService: InventarioService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private reporteService: ReporteService
   ) {}
 
   ionViewWillEnter() {
@@ -51,6 +53,9 @@ export class StockPage {
           role: 'destructive',
           handler: () => {
             this.inventarioService.eliminarInsumo(id);
+            this.reporteService.registrarActividad(
+            'Eliminó insumo',
+            `Insumo: ${nombre}`);
             this.cargarInsumos();
           }
         }
@@ -103,6 +108,9 @@ export class StockPage {
               unidad: data.unidad,
               categoria: data.categoria
             });
+            this.reporteService.registrarActividad(
+            'Editó insumo',
+            `Insumo: ${data.nombre} | Cantidad: ${data.cantidad} ${data.unidad}`);
             this.cargarInsumos();
           }
         }
@@ -124,11 +132,10 @@ export class StockPage {
   }
 
   obtenerIcono(categoria: string) {
-    switch (categoria) {
-      case 'Verduras': return '🥬';
-      case 'Carnes': return '🍗';
-      case 'Bebidas': return '🥤';
-      case 'Granos': return '🌾';
+    switch (categoria.toLowerCase()) {
+      case 'verduras': return '🥬';
+      case 'carnes': return '🍗';
+      case 'bebidas': return '🥤';
       default: return '📦';
     }
   }

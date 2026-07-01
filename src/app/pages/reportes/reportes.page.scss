@@ -1,0 +1,56 @@
+.campo-fecha {
+  margin-bottom: 16px;
+  --border-radius: 12px;
+}
+
+.sin-actividad {
+  text-align: center;
+  margin-top: 60px;
+
+  .icono {
+    font-size: 48px;
+    margin-bottom: 12px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  p {
+    color: #8c8c8c;
+  }
+}
+
+.actividad-card {
+  margin-bottom: 12px;
+  border-left: 4px solid #4c6ef5;
+}
+
+.actividad-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+
+  .accion {
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .hora {
+    font-size: 12px;
+    color: #8c8c8c;
+  }
+}
+
+.detalle {
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.usuario {
+  font-size: 13px;
+  color: #8c8c8c;
+  margin-top: 4px;
+}

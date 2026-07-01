@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, AlertController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -24,7 +24,8 @@ export class LoginPage {
 
   constructor(
     private router: Router,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private alertController: AlertController
   ) {}
 
   iniciarSesion() {
@@ -41,5 +42,17 @@ export class LoginPage {
     }
 
     this.mensajeError = 'Correo o contraseña incorrectos';
+  }
+  async olvidoPassword() {
+    const alert = await this.alertController.create({
+      header: '¿Olvidaste tu contraseña?',
+      message: 'Contacta a un administrador del sistema para restablecer tu contraseña.',
+      buttons: ['Entendido']});
+    await alert.present();
+  }
+  ionViewWillEnter() {
+    this.correo = '';
+    this.password = '';
+    this.mensajeError = '';
   }
 }

@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ver Usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div *ngIf="usuarios.length === 0" class="sin-usuarios">
+    <div class="icono">👥</div>
+    <h3>Sin usuarios</h3>
+    <p>No hay usuarios registrados.</p>
+  </div>
+
+  <ion-card *ngFor="let item of usuarios" class="usuario-card">
+    <ion-card-content>
+
+      <div class="usuario-header">
+        <div class="avatar">👤</div>
+        <div>
+          <h3>{{ item.nombre }}</h3>
+          <p>{{ item.correo }}</p>
+        </div>
+        <div class="rol-badge" [ngClass]="item.rol === 'admin' ? 'rol-admin' : 'rol-empleado'">
+          {{ item.rol }}
+        </div>
+      </div>
+
+      <p class="telefono">📞 {{ item.telefono }}</p>
+
+      <div class="acciones">
+        <ion-button size="small" (click)="editarUsuario(item)">
+          Editar
+        </ion-button>
+        <ion-button size="small" color="danger" (click)="confirmarEliminar(item.id, item.nombre)">
+          Eliminar
+        </ion-button>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

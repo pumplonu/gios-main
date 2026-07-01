@@ -39,4 +39,14 @@
     Alertas
   </ion-button>
 
+  <ion-button expand="block" routerLink="/reportes" color="tertiary" class="menu-btn">
+    <ion-icon name="bar-chart-outline" slot="start"></ion-icon>
+    Reportes
+  </ion-button>
+
+  <ion-button *ngIf="esAdmin" expand="block" routerLink="/ver-usuarios" color="medium" class="menu-btn">
+    <ion-icon name="people-outline" slot="start"></ion-icon>
+    Ver Usuarios
+  </ion-button>
+
 </ion-content>
