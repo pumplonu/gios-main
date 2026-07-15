@@ -3,33 +3,63 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" text=""></ion-back-button>
     </ion-buttons>
-    <ion-title>Alertas de Stock</ion-title>
+    <ion-title>Alertas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-  <div *ngIf="insumosCriticos.length === 0" class="sin-alertas">
+  <!-- sin alertas -->
+  <div *ngIf="insumosCriticos.length === 0 && insumosPorVencer.length === 0"
+       class="sin-alertas">
     <div class="icono-ok">✅</div>
     <h3>Sin alertas</h3>
-    <p>No hay productos en estado crítico.</p>
+    <p>No hay productos en estado crítico ni próximos a vencer.</p>
   </div>
 
-  <ion-card *ngFor="let item of insumosCriticos" class="alerta-card">
-    <ion-card-content>
-      <div class="alerta-header">
-        <span class="icono-alerta">⚠️</span>
-        <div>
-          <h3>{{ item.nombre }}</h3>
-          <p>Categoría: <strong>{{ item.categoria }}</strong></p>
+  <!-- stock crítico -->
+  <div *ngIf="insumosCriticos.length > 0">
+    <h3 class="seccion-titulo">⚠️ Stock crítico</h3>
+    <ion-card *ngFor="let item of insumosCriticos" class="alerta-card critico">
+      <ion-card-content>
+        <div class="alerta-header">
+          <span class="icono-alerta">⚠️</span>
+          <div>
+            <h3>{{ item.nombre }}</h3>
+            <p>Categoría: <strong>{{ item.categoria }}</strong></p>
+          </div>
         </div>
-      </div>
-      <div class="alerta-detalle">
-        <p>Stock actual: <strong>{{ item.cantidad }} {{ item.unidad }}</strong></p>
-        <div class="estado-critico">Crítico</div>
-        <p class="mensaje">Este producto está por agotarse, se recomienda reabastecer.</p>
-      </div>
-    </ion-card-content>
-  </ion-card>
+        <div class="alerta-detalle">
+          <p>Stock actual: <strong>{{ item.cantidad }} {{ item.unidad }}</strong></p>
+          <div class="estado-critico">Crítico</div>
+          <p class="mensaje">Este producto está por agotarse, se recomienda reabastecer.</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- por vencer -->
+  <div *ngIf="insumosPorVencer.length > 0">
+    <h3 class="seccion-titulo">🕐 Próximos a vencer</h3>
+    <ion-card *ngFor="let item of insumosPorVencer" class="alerta-card vencer">
+      <ion-card-content>
+        <div class="alerta-header">
+          <span class="icono-alerta">🕐</span>
+          <div>
+            <h3>{{ item.nombre }}</h3>
+            <p>Categoría: <strong>{{ item.categoria }}</strong></p>
+          </div>
+        </div>
+        <div class="alerta-detalle">
+          <p>Stock actual: <strong>{{ item.cantidad }} {{ item.unidad }}</strong></p>
+          <p>Vence el: <strong>{{ item.fechaVencimiento }}</strong></p>
+          <div class="estado-vencer">
+            Vence en {{ diasParaVencer(item.fechaVencimiento) }} día(s)
+          </div>
+          <p class="mensaje">Este producto está próximo a vencer, revise su uso.</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
 </ion-content>

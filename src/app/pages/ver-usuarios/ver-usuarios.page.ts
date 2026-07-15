@@ -32,69 +32,71 @@ export class VerUsuariosPage implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
-    this.cargarUsuarios();
-  }
+ngOnInit() {
+  this.cargarUsuarios();
+}
 
-  ionViewWillEnter() {
-    this.cargarUsuarios();
-  }
+ionViewWillEnter() {
+  this.cargarUsuarios();
+}
 
-  cargarUsuarios() {
-    this.usuarios = this.usuarioService.obtenerUsuarios();
-  }
+async cargarUsuarios() {
+  this.usuarios = await this.usuarioService.obtenerUsuarios();
+}
 
-  async confirmarEliminar(id: number, nombre: string) {
-    const alert = await this.alertController.create({
-      header: '¿Eliminar usuario?',
-      message: `¿Estás seguro de eliminar a "${nombre}"?`,
-      buttons: [
-        { text: 'Cancelar', role: 'cancel' },
-        {
-          text: 'Eliminar',
-          role: 'destructive',
-          handler: () => {
-            this.usuarioService.eliminarUsuario(id);
+async confirmarEliminar(id: string, nombre: string) { // id: string ya no number
+  const alert = await this.alertController.create({
+    header: '¿Eliminar usuario?',
+    message: `¿Estás seguro de eliminar a "${nombre}"?`,
+    buttons: [
+      { text: 'Cancelar', role: 'cancel' },
+      {
+        text: 'Eliminar',
+        role: 'destructive',
+        handler: () => {
+          this.usuarioService.eliminarUsuario(id).then(() => {
             this.reporteService.registrarActividad(
               'Eliminó usuario',
               `Usuario: ${nombre}`
             );
             this.cargarUsuarios();
-          }
+          });
         }
-      ]
-    });
-    await alert.present();
-  }
+      }
+    ]
+  });
+  await alert.present();
+}
 
-  async editarUsuario(item: Usuario) {
-    const alert = await this.alertController.create({
-      header: 'Editar Usuario',
-      inputs: [
-        { name: 'nombre', type: 'text', placeholder: 'Nombre', value: item.nombre },
-        { name: 'correo', type: 'email', placeholder: 'Correo', value: item.correo },
-        { name: 'telefono', type: 'text', placeholder: 'Teléfono', value: item.telefono }
-      ],
-      buttons: [
-        { text: 'Cancelar', role: 'cancel' },
-        {
-          text: 'Guardar',
-          handler: (data) => {
-            this.usuarioService.actualizarUsuario({
-              ...item,
-              nombre: data.nombre,
-              correo: data.correo,
-              telefono: data.telefono
-            });
+async editarUsuario(item: Usuario) {
+  const alert = await this.alertController.create({
+    header: 'Editar Usuario',
+    inputs: [
+      { name: 'nombre', type: 'text', placeholder: 'Nombre', value: item.nombre },
+      { name: 'correo', type: 'email', placeholder: 'Correo', value: item.correo },
+      { name: 'telefono', type: 'text', placeholder: 'Teléfono', value: item.telefono }
+    ],
+    buttons: [
+      { text: 'Cancelar', role: 'cancel' },
+      {
+        text: 'Guardar',
+        handler: (data) => {
+          this.usuarioService.actualizarUsuario({
+            ...item,
+            nombre: data.nombre,
+            correo: data.correo,
+            telefono: data.telefono
+          }).then(() => {
             this.reporteService.registrarActividad(
               'Editó usuario',
               `Usuario: ${data.nombre} | Correo: ${data.correo}`
             );
             this.cargarUsuarios();
-          }
+          });
         }
-      ]
-    });
-    await alert.present();
-  }
+      }
+    ]
+  });
+  await alert.present();
+}
 }

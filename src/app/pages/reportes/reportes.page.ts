@@ -37,18 +37,22 @@ export class ReportesPage implements OnInit {
     this.esAdmin = usuario?.rol === 'admin';
   }
 
-  ionViewWillEnter() {
-    this.fechasDisponibles = this.reporteService.obtenerFechasDisponibles();
-    if (this.fechasDisponibles.length > 0) {
-      this.fechaSeleccionada = this.fechasDisponibles[0];
-      this.filtrarPorFecha();
+  async ionViewWillEnter() {
+  this.fechasDisponibles = await this.reporteService.obtenerFechasDisponibles();
+  if (this.fechasDisponibles.length > 0) {
+    this.fechaSeleccionada = this.fechasDisponibles[0];
+    await this.filtrarPorFecha();
     }
   }
 
-  filtrarPorFecha() {
-    const actividades = this.reporteService.obtenerPorFecha(this.fechaSeleccionada);
-    this.actividadesFiltradas = this.esAdmin
-      ? actividades
-      : actividades.filter(a => a.accion !== 'Registró usuario');
+  async filtrarPorFecha() {
+  const actividades = await this.reporteService.obtenerPorFecha(this.fechaSeleccionada);
+  this.actividadesFiltradas = this.esAdmin
+    ? actividades
+    : actividades.filter(a => 
+      a.accion !== 'Registró usuario' &&
+      a.accion !== 'Editó usuario' &&
+      a.accion !== 'Eliminó usuario'
+    );
   }
 }

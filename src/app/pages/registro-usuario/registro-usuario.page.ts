@@ -70,28 +70,22 @@ private usuarioService:UsuarioService
 
 ){}
 
-guardarUsuario(){
+async guardarUsuario(){
 
-this.usuarioService.guardarUsuario({
+  await this.usuarioService.guardarUsuario({
+    nombre: this.nombre,
+    correo: this.correo,
+    password: this.password,
+    telefono: this.telefono,
+    rol: this.rol
+  });
 
-nombre:this.nombre,
+  await this.reporteService.registrarActividad(
+    'Registró usuario',
+    `Usuario: ${this.nombre} | Rol: ${this.rol} | Correo: ${this.correo}`
+  );
 
-correo:this.correo,
-
-password:this.password,
-
-telefono:this.telefono,
-
-rol:this.rol
-
-});
-
-this.reporteService.registrarActividad(
-  'Registró usuario',
-  `Usuario: ${this.nombre} | Rol: ${this.rol} | Correo: ${this.correo}`);
-this.router.navigate([
-'/registro-exitoso'
-]);
+  this.router.navigate(['/registro-exitoso']);
 }
 
 

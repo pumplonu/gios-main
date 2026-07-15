@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
+import {
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  updateDoc,
+  deleteDoc
+} from 'firebase/firestore';
+import { db } from '../firebase.config';
 
 export interface Insumo {
-
-  id:number;
-
-  nombre:string;
-
-  categoria:string;
-
-  cantidad:number;
-
-  unidad:string;
-
-  fecha:string;
-
+  id: string; 
+  nombre: string;
+  categoria: string;
+  cantidad: number;
+  unidad: string;
+  fecha: string;
+  fechaVencimiento: string;
 }
 
 @Injectable({
@@ -21,80 +24,29 @@ export interface Insumo {
 })
 export class InventarioService {
 
-  private readonly STORAGE_KEY = 'insumos';
+  private coleccion = collection(db, 'insumos');
 
   constructor() {}
 
-  obtenerInsumos():Insumo[]{
-
-    const datos = localStorage.getItem(
-      this.STORAGE_KEY
-    );
-
-    return datos
-      ? JSON.parse(datos)
-      : [];
-
+  async obtenerInsumos(): Promise<Insumo[]> {
+    const snapshot = await getDocs(this.coleccion);
+    return snapshot.docs.map(d => ({
+      id: d.id,
+      ...d.data()
+    } as Insumo));
   }
 
-  guardarInsumo(insumo:Omit<Insumo,'id'>){
-
-    const insumos =
-      this.obtenerInsumos();
-
-    const nuevo:Insumo = {
-
-      id:Date.now(),
-
-      ...insumo
-
-    };
-
-    insumos.push(nuevo);
-
-    localStorage.setItem(
-      this.STORAGE_KEY,
-      JSON.stringify(insumos)
-    );
-
+  async guardarInsumo(insumo: Omit<Insumo, 'id'>): Promise<void> {
+    await addDoc(this.coleccion, insumo);
   }
 
-  eliminarInsumo(id:number){
-
-    const insumos =
-      this.obtenerInsumos();
-
-    const actualizados =
-      insumos.filter(
-        item => item.id !== id
-      );
-
-    localStorage.setItem(
-      this.STORAGE_KEY,
-      JSON.stringify(actualizados)
-    );
-
+  async eliminarInsumo(id: string): Promise<void> {
+    await deleteDoc(doc(db, 'insumos', id));
   }
 
-  actualizarInsumo(insumoActualizado:Insumo){
-
-    const insumos =
-      this.obtenerInsumos();
-
-    const actualizados =
-      insumos.map(item =>
-
-        item.id === insumoActualizado.id
-          ? insumoActualizado
-          : item
-
-      );
-
-    localStorage.setItem(
-      this.STORAGE_KEY,
-      JSON.stringify(actualizados)
-    );
-
+  async actualizarInsumo(insumoActualizado: Insumo): Promise<void> {
+    const { id, ...datos } = insumoActualizado;
+    await updateDoc(doc(db, 'insumos', id), datos);
   }
 
 }

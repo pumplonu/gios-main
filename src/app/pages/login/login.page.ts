@@ -28,8 +28,8 @@ export class LoginPage {
     private alertController: AlertController
   ) {}
 
-  iniciarSesion() {
-    const usuario = this.usuarioService.validarLogin(
+  async iniciarSesion() {
+    const usuario = await this.usuarioService.validarLogin(
       this.correo,
       this.password
     );

@@ -61,49 +61,35 @@ class="insumo-card"
 
 <div class="detalle">
 
-<p>
+  <p>
+    Categoría:
+    <strong>{{item.categoria}}</strong>
+  </p>
 
-Categoría:
-<strong>
+  <p>
+    Stock:
+    <strong>{{item.cantidad}} {{item.unidad}}</strong>
+  </p>
 
-{{item.categoria}}
+  <p *ngIf="item.fechaVencimiento">
+    Vence: <strong>{{item.fechaVencimiento}}</strong>
+  </p>
 
-</strong>
-
-</p>
-
-<p>
-
-Stock:
-<strong>
-
-{{item.cantidad}}
-{{item.unidad}}
-
-</strong>
-
-</p>
-
-<div
-class="estado-stock"
-[ngClass]="obtenerClaseEstado(item.cantidad)">
-
-{{obtenerEstado(item.cantidad)}}
-
-</div>
+  <div
+    class="estado-stock"
+    [ngClass]="obtenerClaseEstado(item.cantidad, item.unidad)">
+    {{obtenerEstado(item.cantidad, item.unidad)}}
+  </div>
 
 </div>
 
 <div class="acciones">
-
-<ion-button size="small" (click)="editarInsumo(item)">
-  Editar
-</ion-button>
-
-<ion-button size="small" color="danger" (click)="confirmarEliminar(item.id, item.nombre)">
-  Eliminar
-</ion-button>
-
+  <ion-button size="small" (click)="editarInsumo(item)">
+    Editar
+  </ion-button>
+  <ion-button size="small" color="danger" (click)="confirmarEliminar(item.id, item.nombre)">
+    Eliminar
+  </ion-button>
 </div>
 
 </ion-card-content>
